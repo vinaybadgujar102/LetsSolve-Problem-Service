@@ -23,7 +23,7 @@ async function addProblem(req, res, next) {
   }
 }
 
-function getProblem(req, res) {
+function getProblem(req, res, next) {
   try {
     const problem = problemService.getProblemById(req.params.id);
     return res.status(StatusCodes.OK).json({
@@ -37,7 +37,7 @@ function getProblem(req, res) {
   }
 }
 
-async function getProblems(req, res) {
+async function getProblems(req, res, next) {
   try {
     const respoonse = await problemService.getAllProblems();
     return res.status(StatusCodes.OK).json({
@@ -51,21 +51,21 @@ async function getProblems(req, res) {
   }
 }
 
-function deleteProblem(req, res) {
+async function deleteProblem(req, res, next) {
   try {
-    const problem = problemService.deleteProblem(req.params.id);
+    const deletedProblem = await problemService.deleteProblem(req.params.id);
     return res.status(StatusCodes.OK).json({
       success: true,
-      message: "Problem deleted successfully",
+      message: "Successfully deleted the problem",
       error: {},
-      data: problem,
+      data: deletedProblem,
     });
   } catch (error) {
     next(error);
   }
 }
 
-function updateProblem(req, res) {
+function updateProblem(req, res, next) {
   try {
     const problem = problemService.updateProblem(req.params.id, req.body);
     return res.status(StatusCodes.OK).json({
