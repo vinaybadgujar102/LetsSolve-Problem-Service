@@ -24,9 +24,17 @@ async function addProblem(req, res, next) {
 }
 
 function getProblem(req, res) {
-  return res
-    .status(StatusCodes.NOT_IMPLEMENTED)
-    .json({ message: "Not implemented" });
+  try {
+    const problem = problemService.getProblemById(req.params.id);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Problem fetched successfully",
+      error: {},
+      data: problem,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 async function getProblems(req, res) {
@@ -44,15 +52,31 @@ async function getProblems(req, res) {
 }
 
 function deleteProblem(req, res) {
-  return res
-    .status(StatusCodes.NOT_IMPLEMENTED)
-    .json({ message: "Not implemented" });
+  try {
+    const problem = problemService.deleteProblem(req.params.id);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Problem deleted successfully",
+      error: {},
+      data: problem,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 function updateProblem(req, res) {
-  return res
-    .status(StatusCodes.NOT_IMPLEMENTED)
-    .json({ message: "Not implemented" });
+  try {
+    const problem = problemService.updateProblem(req.params.id, req.body);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Problem updated successfully",
+      error: {},
+      data: problem,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 module.exports = {
