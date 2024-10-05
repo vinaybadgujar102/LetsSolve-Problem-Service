@@ -29,10 +29,18 @@ function getProblem(req, res) {
     .json({ message: "Not implemented" });
 }
 
-function getProblems(req, res) {
-  return res
-    .status(StatusCodes.NOT_IMPLEMENTED)
-    .json({ message: "Not implemented" });
+async function getProblems(req, res) {
+  try {
+    const respoonse = await problemService.getAllProblems();
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Problems fetched successfully",
+      error: {},
+      data: respoonse,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 function deleteProblem(req, res) {
