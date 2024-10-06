@@ -6,7 +6,9 @@ const { ProblemRepository } = require("../repositories");
 
 const problemService = new ProblemService(new ProblemRepository());
 function pingProblemController(req, res) {
-  return res.send("Pong problem controller");
+  return res.status(StatusCodes.OK).json({
+    message: "Ping Successful",
+  });
 }
 
 async function addProblem(req, res, next) {
