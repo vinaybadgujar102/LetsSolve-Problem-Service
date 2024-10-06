@@ -5,6 +5,7 @@ const { PORT } = require("./config/server.config");
 const apiRouter = require("./routes");
 const { connectDB } = require("./config/db.config");
 const { errorHandler } = require("./utils");
+const { StatusCodes } = require("http-status-codes");
 
 const app = express();
 
@@ -15,7 +16,9 @@ app.use(bodyParser.text());
 app.use("/api", apiRouter);
 
 app.get("/ping", (req, res) => {
-  res.send("pong");
+  res.status(StatusCodes.OK).json({
+    message: "Problem Service is up and running",
+  });
 });
 
 // last middleware if any error comes
