@@ -28,6 +28,23 @@ const problemSchema = new Schema({
       },
     },
   ],
+  codeStubs: [
+    {
+      language: {
+        type: String,
+        enum: ["CPP", "JAVA", "PYTHON"],
+        required: [true, "Stub language is required"],
+      },
+      startSnippet: {
+        type: String,
+        required: [true, "Start snippet is required"],
+      },
+      endSnippet: {
+        type: String,
+        required: [true, "End snippet is required"],
+      },
+    },
+  ],
   editorial: {
     type: String,
   },
