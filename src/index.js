@@ -6,6 +6,7 @@ const apiRouter = require("./routes");
 const { connectDB } = require("./config/db.config");
 const { errorHandler } = require("./utils");
 const { StatusCodes } = require("http-status-codes");
+const dbConnector = require("./config/db.config");
 
 const app = express();
 
@@ -26,5 +27,5 @@ app.use(errorHandler);
 
 app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
-  await connectDB();
+  await dbConnector.connect();
 });

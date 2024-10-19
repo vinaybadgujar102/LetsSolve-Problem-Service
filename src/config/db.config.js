@@ -35,6 +35,7 @@ class DBConnection {
     if (NODE_ENV == "development") {
       await mongoose.connect(ATLAS_DB_URL);
       this.#isConnected = true;
+      console.log("Connected to DB");
     }
   }
 
