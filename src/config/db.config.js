@@ -1,18 +1,48 @@
 const mongoose = require("mongoose");
-const { NODE_ENV, ATLAS_DB_URL } = require("./server.config");
+const { ATLAS_DB_URL, NODE_ENV } = require("./server.config");
 
-async function connectDB() {
-  try {
-    if (NODE_ENV === "development") {
-      console.log(ATLAS_DB_URL);
+// async function connectToDB() {
 
-      await mongoose.connect(ATLAS_DB_URL);
+//     try {
+//         if(NODE_ENV == "development") {
+//             await mongoose.connect(ATLAS_DB_URL);
+//         }
+//     } catch(error) {
+//         console.log('Unable to connect to the DB server');
+//         console.log(error);
+//     }
+
+// }
+
+let instance; // stores db instance
+
+class DBConnection {
+  #isConnected;
+  constructor(db_uri) {
+    if (instance) {
+      // if the instance variable already has a value
+      throw new Error("Only one connection can exist");
     }
-    console.log("Connected to database");
-  } catch (error) {
-    console.log("Unable to connect to database");
-    console.log(error);
+    this.uri = db_uri;
+    instance = this;
+    this.#isConnected = false;
+  }
+
+  async connect() {
+    if (this.#isConnected) {
+      throw new Error("DB Already connected");
+    }
+    if (NODE_ENV == "development") {
+      await mongoose.connect(ATLAS_DB_URL);
+      this.#isConnected = true;
+    }
+  }
+
+  async disconnect() {
+    this.isConnected = false;
   }
 }
 
-module.exports = { connectDB };
+const db = Object.freeze(new DBConnection());
+
+module.exports = db;
