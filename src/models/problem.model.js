@@ -10,7 +10,7 @@ const problemSchema = new Schema({
     type: String,
     required: [true, "Description is required"],
   },
-  diffiulty: {
+  difficulty: {
     type: String,
     enum: ["easy", "medium", "hard"],
     required: [true, "Difficulty is required"],

@@ -7,8 +7,14 @@ const { connectDB } = require("./config/db.config");
 const { errorHandler } = require("./utils");
 const { StatusCodes } = require("http-status-codes");
 const dbConnector = require("./config/db.config");
+const cors = require("cors");
 
+const corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
 const app = express();
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
