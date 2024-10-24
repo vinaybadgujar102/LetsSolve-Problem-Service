@@ -7,7 +7,9 @@ const { connectDB } = require("./config/db.config");
 const { errorHandler } = require("./utils");
 const { StatusCodes } = require("http-status-codes");
 const dbConnector = require("./config/db.config");
-const cors = require("cors");
+const cors = require("cors", {
+  origin: "*",
+});
 
 const app = express();
 app.use(cors());
