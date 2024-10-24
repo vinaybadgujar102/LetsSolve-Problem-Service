@@ -7,12 +7,19 @@ const { connectDB } = require("./config/db.config");
 const { errorHandler } = require("./utils");
 const { StatusCodes } = require("http-status-codes");
 const dbConnector = require("./config/db.config");
-const cors = require("cors", {
-  origin: "*",
-});
+
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? process.env.ALLOWED_ORIGINS.split(",") // Array of allowed origins in production
+      : "*", // Allow all origins in development
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
 
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

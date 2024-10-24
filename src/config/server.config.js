@@ -7,4 +7,5 @@ module.exports = {
   ATLAS_DB_URL: process.env.ATLAS_DB_URL,
   NODE_ENV: process.env.NODE_ENV,
   LOG_DB_URL: process.env.LOG_DB_URL,
+  ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS || "http://localhost:5173",
 };
