@@ -7,6 +7,7 @@ const { connectDB } = require("./config/db.config");
 const { errorHandler } = require("./utils");
 const { StatusCodes } = require("http-status-codes");
 const dbConnector = require("./config/db.config");
+const cors = require("cors");
 
 const corsOptions = {
   origin:

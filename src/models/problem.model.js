@@ -39,6 +39,10 @@ const problemSchema = new Schema({
         type: String,
         required: [true, "Start snippet is required"],
       },
+      userSnippet: {
+        type: String,
+        required: [true, "User snippet is required"],
+      },
       endSnippet: {
         type: String,
         required: [true, "End snippet is required"],
